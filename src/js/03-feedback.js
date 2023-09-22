@@ -30,8 +30,21 @@ form.addEventListener('input', throttle(handleInput, 500));
 form.addEventListener('submit', handleSubmit);
 
 function handleSubmit(event) {
+  if (
+    form.elements.email.value.trim().length === 0 &&
+    form.elements.message.value.trim().length === 0
+  ) {
+    return alert('Please fill in all fields');
+  }
   event.preventDefault();
-  console.log(JSON.parse(localStorage.getItem(FORM_KEY)));
+  feedbackValue.email = form.elements.email.value;
+  feedbackValue.message = form.elements.message.value;
+  console.log(feedbackValue);
+  for (let key in feedbackValue) {
+    delete feedbackValue[key];
+  }
+  console.log(feedbackValue);
+
   form.elements.message.value = '';
   form.elements.email.value = '';
   localStorage.removeItem(FORM_KEY);
