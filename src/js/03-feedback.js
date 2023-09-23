@@ -31,10 +31,11 @@ form.addEventListener('submit', handleSubmit);
 
 function handleSubmit(event) {
   if (
-    form.elements.email.value.trim().length === 0 &&
+    form.elements.email.value.trim().length === 0 ||
     form.elements.message.value.trim().length === 0
   ) {
-    return alert('Please fill in all fields');
+    alert('Please fill in all fields');
+    return;
   }
   event.preventDefault();
   feedbackValue.email = form.elements.email.value;
